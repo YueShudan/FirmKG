@@ -1,2 +1,2 @@
 # FirmKG
-Security Risk Assessment of IoT Firmware Binary Based on Knowledge Graph
+Security Risk Assessment of IoT Firmware Binaries Based on Knowledge Graph

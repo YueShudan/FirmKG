@@ -226,20 +226,20 @@ def search_nvd_api(keyword):
         
         for retry_count in range(max_retries):
             try:
-                print(f"    正在请求数据 (第 {retry_count + 1} 次尝试)...")
+                print(f"    Requesting data (第 {retry_count + 1} 次尝试)...")
                 response = requests.get(base_url, params=params, headers=headers, timeout=30)
                 
                 # Check if the rate limit is reached
                 if response.status_code == 403:
-                    print(f"    警告：达到API速率限制，等待{retry_delay}秒...")
+                    print(f"    Warning: API rate limit reached, waiting {retry_delay} seconds...")
                     time.sleep(retry_delay)
                     continue
                     
                 # Check other error status codes
                 if response.status_code != 200:
-                    print(f"    错误：HTTP状态码 {response.status_code}")
+                    print(f"    Error: HTTP status code {response.status_code}")
                     if retry_count < max_retries - 1:
-                        print(f"    等待{retry_delay}秒后重试...")
+                        print(f"    Waiting {retry_delay} seconds before retrying...")
                         time.sleep(retry_delay)
                         continue
                     break
@@ -249,12 +249,12 @@ def search_nvd_api(keyword):
                 # Get the total number of results
                 if total_results is None:
                     total_results = data.get('totalResults', 0)
-                    print(f"    总共找到 {total_results} 个潜在漏洞")
+                    print(f"    Total number of potential vulnerabilities found: {total_results}")
                 
                 # Add the vulnerabilities on the current page
                 if 'vulnerabilities' in data:
                     all_vulnerabilities.extend(data['vulnerabilities'])
-                    print(f"    已获取 {len(all_vulnerabilities)}/{total_results} 个结果")
+                    print(f"    Number of results obtained: {len(all_vulnerabilities)}/{total_results}")
                 
                 # Check if the next page needs to be fetched
                 if len(all_vulnerabilities) >= total_results or not data.get('vulnerabilities'):
@@ -558,12 +558,12 @@ def process_single_file(input_file, output_file):
                         skipped_packages.append((component_name, "Component name or version is empty or invalid"))
                         continue
                         
-                    # 检查组件名是否有效
+                    # Check if the component name is valid
                     if not is_valid_package_name(component_name):
                         skipped_packages.append((component_name, "Component name is too short or invalid"))
                         continue
                         
-                    # 检查版本号是否有效
+                    # Check if the version number is valid
                     if not parse_version(component_version):
                         skipped_packages.append((f"{component_name} {component_version}", "Version number format is invalid"))
                         continue

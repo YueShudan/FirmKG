@@ -91,7 +91,7 @@ def save_to_json(component, json_file):
 
         print(f"Successfully saved component information: {component['bin_name']} - {component['firmware_name']}")
         print(f"JSON saved location: {os.path.abspath(json_file)}")
-        print(f"CSV保存位置: {os.path.abspath(csv_file)}")
+        print(f"CSV saved location: {os.path.abspath(csv_file)}")
 
     except Exception as e:
         print(f"Error saving data: {str(e)}")
@@ -114,14 +114,14 @@ def binaryAnalyse(so_files, output_file):
 
     count = 1
     all_results = []
-    print("so_files长度", len(so_files))
+    print("Length of so_files: ", len(so_files))
 
     # Create an empty JSON file
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump([], f, indent=2, ensure_ascii=False)
 
     for file in so_files:
-        print(f"第{count}个分析的文件:", file)
+        print(f"The {count}th file to be analyzed: {file}")
         # Extract the name of the app - use os.path to process the path
         # Normalize the path, replace all backslashes with forward slashes
         normalized_path = file.replace('\\', '/')
@@ -146,9 +146,9 @@ def binaryAnalyse(so_files, output_file):
         try:
             # Upload the file and get the SHA-256
             sha256 = bai.upload(file)
-            print(f"文件上传成功: {file_name}")
+            print(f"File upload successful: {file_name}")
             # Wait for the analysis to complete
-            print("等待分析完成...")
+            print("Waiting for analysis to complete...")
             bai.wait_until_analysis_done(sha256, timeout=90)
 
             # Get the analysis results

@@ -1,7 +1,7 @@
 # FirmKG
 Security Risk Assessment of IoT Firmware Binaries
 
-#Overview
+# Overview
 FirmKG first employs static analysis to extract key firmware information, such as binary dependencies and known vulnerabilities. It then builds a vulnerability knowledge graph using Cypher, representing entities, relationships, and attributes. Finally, an optimized PageRank algorithm calculates a security risk score for each binary based on its dependencies and vulnerability severity.
 
 

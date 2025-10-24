@@ -6,6 +6,7 @@ FirmKG first employs static analysis to extract key firmware information, such a
 
 
 We present our approach and the findings of this work in the following research paper:
+
 FirmKG: Security risk assessment of IoT firmware binaries based on knowledge graph
 
 # Repository Structure
